@@ -1,6 +1,6 @@
-name: Iabsis Rancher Catalog
+name: Icinga2 server
 description: |
-  # This Private repository will store all Iabsis containers.
+  # This is a test description
 version: 1
 category: any
 maintainer: Olivier Bitsch
