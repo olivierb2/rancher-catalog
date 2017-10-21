@@ -1,0 +1,17 @@
+version: '2'
+services:
+  icinga2:
+    build: .
+    ports:
+    - "80:80"
+    volumes:
+    - /var/log
+    links:
+    - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD: "icinga2"
+      - POSTGRES_USER: "icinga2"
+volumes:
+  logvolume01: {}

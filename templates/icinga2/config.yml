@@ -1,0 +1,8 @@
+name: Iabsis Rancher Catalog
+description: |
+  # This Private repository will store all Iabsis containers.
+version: 1
+category: any
+maintainer: Olivier Bitsch
+license: Private
+projectURL: http://iabsis.com
