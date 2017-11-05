@@ -1,49 +1,50 @@
-.catalog:
+version: '2'
+catalog:
   name: "Icinga2"
   version: 1
   description: "Monitoring system"
   uuid: icinga-0
   questions:
-  - variable: "VOLUME_DRIVER"
-    description: "The VOLUME driver to use with this server"
-    label: "VOLUME Driver"
-    required: true
-    default: "local"
-      type: enum
-      options:
-        - local
-        - rancher-nfs
-
-icinga2-server:
-  scale: 1
-  start_on_create: true
-icinga2-web:
-  scale: 1
-  start_on_create: true
-icinga2-database-populate:
-  scale: 1
-  start_on_create: true
-icinga2-ha:
-  start_on_create: true
-  lb_config:
-    certs: []
-    port_rules:
-    - hostname: ''
-      priority: 1
-      protocol: http
-      service: icinga2-web
-      source_port: 4000
-      target_port: 80
-  health_check:
-    response_timeout: 2000
-    healthy_threshold: 2
-    port: 42
-    unhealthy_threshold: 3
-    initializing_timeout: 60000
-    interval: 2000
-    reinitializing_timeout: 60000
-db:
-  scale: 1
-  start_on_create: true
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to use with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "local"
+        type: enum
+        options:
+          - local
+          - rancher-nfs
+services:
+  icinga2-server:
+    scale: 1
+    start_on_create: true
+  icinga2-web:
+    scale: 1
+    start_on_create: true
+  icinga2-database-populate:
+    scale: 1
+    start_on_create: true
+  icinga2-ha:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - hostname: ''
+        priority: 1
+        protocol: http
+        service: icinga2-web
+        source_port: 4000
+        target_port: 80
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  db:
+    scale: 1
+    start_on_create: true
 
 

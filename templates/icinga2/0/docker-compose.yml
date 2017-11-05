@@ -1,62 +1,64 @@
-icinga2-server:
-  image: obitwo/icinga2-server
-  stdin_open: true
-  volumes:
-  - icinga2:/etc/icinga2
-  tty: true
-  labels:
-    io.rancher.container.pull_image: always
-  links:
-  - db:db
+version: '2'
+  services:
+  icinga2-server:
+    image: obitwo/icinga2-server
+    stdin_open: true
+    volumes:
+    - icinga2:/etc/icinga2
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+    links:
+    - db:db
 
-icinga2-web:
-  image: obitwo/icinga2-web
-  stdin_open: true
-  volumes:
-  - icingaweb2:/etc/icingaweb2
-  tty: true
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.scheduler.global: 'true'
-  links:
-  - db:db
+  icinga2-web:
+    image: obitwo/icinga2-web
+    stdin_open: true
+    volumes:
+    - icingaweb2:/etc/icingaweb2
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+    links:
+    - db:db
 
-icinga2-ha:
-  image: rancher/lb-service-haproxy:v0.7.9
-  ports:
-  - 80:80/tcp
-  labels:
-    io.rancher.container.agent.role: environmentAdmin
-    io.rancher.container.create_agent: 'true'
-    io.rancher.scheduler.global: 'true'
+  icinga2-ha:
+    image: rancher/lb-service-haproxy:v0.7.9
+    ports:
+    - 80:80/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
 
-icinga2-database-populate:
-  image: obitwo/icinga2-database
-  stdin_open: true
-  tty: true
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.start_once: 'true'
-  links:
-  - db:db
+  icinga2-database-populate:
+    image: obitwo/icinga2-database
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+    links:
+    - db:db
 
-db:
-  image: postgres
-  environment:
-    POSTGRES_PASSWORD: icinga2
-    POSTGRES_USER: icinga2
-  stdin_open: true
-  volumes:
-  - icinga2:/var/lib/postgresql/data
-  tty: true
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.sidekicks: icinga2-database-populate
-
-volumes:
   db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: icinga2
+      POSTGRES_USER: icinga2
+    stdin_open: true
+    volumes:
+    - icinga2:/var/lib/postgresql/data
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: icinga2-database-populate
+
+  volumes:
+    db:
+      driver: ${VOLUME_DRIVER}
+    icinga2:
+      driver: ${VOLUME_DRIVER}
+      icingaweb2:
     driver: ${VOLUME_DRIVER}
-  icinga2:
-    driver: ${VOLUME_DRIVER}
-    icingaweb2:
-  driver: ${VOLUME_DRIVER}
