@@ -54,11 +54,11 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: icinga2-database-populate
-
-  volumes:
-    db:
-      driver: ${volume_driver}
-    icinga2:
-      driver: ${volume_driver}
-    icingaweb2:
-      driver: ${volume_driver}
+      
+volumes:
+  db:
+    driver: ${volume_driver}
+  icinga2:
+    driver: ${volume_driver}
+  icingaweb2:
+    driver: ${volume_driver}
