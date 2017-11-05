@@ -13,7 +13,7 @@ icinga2-web:
   image: obitwo/icinga2-web
   stdin_open: true
   volumes:
-  - /etc/icingaweb2
+  - icingaweb2:/etc/icingaweb2
   tty: true
   labels:
     io.rancher.container.pull_image: always
@@ -52,3 +52,11 @@ db:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.sidekicks: icinga2-database-populate
+
+volumes:
+  db:
+    driver: ${VOLUME_DRIVER}
+  icinga2:
+    driver: ${VOLUME_DRIVER}
+    icingaweb2:
+  driver: ${VOLUME_DRIVER}

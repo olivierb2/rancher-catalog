@@ -4,12 +4,21 @@
   description: "Monitoring system"
   uuid: icinga-0
   questions:
+  - variable: "VOLUME_DRIVER"
+    description: "The VOLUME driver to use with this server"
+    label: "VOLUME Driver"
+    required: true
+    default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
 
 icinga2-server:
   scale: 1
   start_on_create: true
 icinga2-web:
-  scale: 2
+  scale: 1
   start_on_create: true
 icinga2-database-populate:
   scale: 1
@@ -23,7 +32,7 @@ icinga2-ha:
       priority: 1
       protocol: http
       service: icinga2-web
-      source_port: 80
+      source_port: 4000
       target_port: 80
   health_check:
     response_timeout: 2000
