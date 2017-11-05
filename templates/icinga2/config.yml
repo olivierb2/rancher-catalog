@@ -1,8 +1,8 @@
 name: Icinga2 server
 description: |
-  # This is a test description
+  Icinga2 is a free and open source monitoring solution.
 version: 1
 category: any
 maintainer: Olivier Bitsch
-license: Private
-projectURL: http://iabsis.com
+license: Public
+projectURL: http://icinga.org/
