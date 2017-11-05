@@ -60,5 +60,5 @@ services:
       driver: ${volume_driver}
     icinga2:
       driver: ${volume_driver}
-      icingaweb2:
-    driver: ${volume_driver}
+    icingaweb2:
+      driver: ${volume_driver}

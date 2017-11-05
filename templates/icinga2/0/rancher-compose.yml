@@ -5,17 +5,17 @@ catalog:
   description: "Monitoring system"
   uuid: icinga-0
   questions:
-    - variable: volume_driver
-      description: "Volume driver to use with this service"
-      label: "Volume driver"
-      required: true
-      default: "local"
-      type: enum
-      options:
-        - local
-        - rancher-nfs
-        - rancher-efs
-        - rancher-ebs
+  - variable: volume_driver
+    description: "Volume driver to use with this service"
+    label: "Volume driver"
+    required: true
+    default: "local"
+    type: enum
+    options:
+    - local
+    - rancher-nfs
+    - rancher-efs
+    - rancher-ebs
 services:
   icinga2-server:
     scale: 1
