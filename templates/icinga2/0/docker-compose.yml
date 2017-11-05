@@ -1,5 +1,5 @@
 version: '2'
-  services:
+services:
   icinga2-server:
     image: obitwo/icinga2-server
     stdin_open: true
@@ -57,8 +57,8 @@ version: '2'
 
   volumes:
     db:
-      driver: ${VOLUME_DRIVER}
+      driver: ${volume_driver}
     icinga2:
-      driver: ${VOLUME_DRIVER}
+      driver: ${volume_driver}
       icingaweb2:
-    driver: ${VOLUME_DRIVER}
+    driver: ${volume_driver}
